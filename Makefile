@@ -1,6 +1,5 @@
 SNAME ?= samba
-RNAME ?= elswork/$(SNAME)
-ONAME ?= deftwork/$(SNAME)
+RNAME ?= devosku/$(SNAME)
 VER ?= `cat VERSION`
 BASENAME ?= alpine:latest
 TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
@@ -47,7 +46,6 @@ debugx: ## Buildx in Debug mode
 buildx: ## Buildx the container
 	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
-	-t ghcr.io/$(ONAME):$(VER) -t ghcr.io/$(ONAME):latest \
 	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
@@ -57,7 +55,7 @@ buildx: ## Buildx the container
 # Operations
 
 start: ## Start samba
-	docker run -d -p 139:139 -p 445:445 -e TZ=Europe/Madrid \
+	docker run -d -p 139:139 -p 445:445 -e TZ=Europe/Helsinki \
 	-v /home/pirate/docker/makefile:/share/folder $(RNAME):$(MODE) \
 	-u "1000:1000:pirate:pirate:put-any-password-here" \
 	-s "SmbShare:/share/folder:rw:pirate"

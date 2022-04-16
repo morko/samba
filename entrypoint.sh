@@ -63,7 +63,7 @@ Example:
 docker run -d -p 445:445 \\
   -- hostname any-host-name \\ # Optional
   -v /any/path:/share/data \\ # Replace /any/path with some path in your system owned by a real user from your host filesystem
-  elswork/samba \\
+  devosku/samba \\
   -u "1000:1000:alice:alice:put-any-password-here" \\ # At least the first user must match (password can be different) with a real user from your host filesystem
   -u "1001:1001:bob:bob:secret" \\
   -u "1002:1002:guest:guest:guest" \\

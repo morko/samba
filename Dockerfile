@@ -4,12 +4,12 @@ FROM ${BASEIMAGE}
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
-LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
+LABEL mantainer="Oskari Pöntinen <mail.morko@gmail.com>" \
     org.opencontainers.image.title="Samba" \
     org.opencontainers.image.description="Multiarch Samba Docker container" \
-    org.opencontainers.image.vendor=Deft.Work \
-    org.opencontainers.image.url=https://deft.work/Samba \
-    org.opencontainers.image.source=https://github.com/DeftWork/samba \
+    org.opencontainers.image.vendor=devosku \
+    org.opencontainers.image.url=https://devosku.com \
+    org.opencontainers.image.source=https://github.com/morko/samba \
     org.opencontainers.image.version=$VERSION \ 
     org.opencontainers.image.created=$BUILD_DATE \
     org.opencontainers.image.revision=$VCS_REF \

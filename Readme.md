@@ -4,20 +4,13 @@ A [Docker](http://docker.com) file to build images for many platforms (linux/amd
 
 > Be aware! You should read carefully the usage documentation of every tool!
 
+This is a fork of [Deft.Work samba repository](https://github.com/deftwork/samba). All kudos to him!
+
 ## Thanks to
 
+- [Deft.Work](https://deft.work/Samba)
 - [Samba](https://www.samba.org/)
 - [dastrasmue rpi-samba](https://github.com/dastrasmue/rpi-samba)
-
-## Details
-
-| Website | GitHub | Docker Hub |
-| --- | --- | --- |
-| [Deft.Work my personal blog](https://deft.work/Samba) | [Samba](https://github.com/DeftWork/samba) | [Samba](https://hub.docker.com/r/elswork/samba) |
-
-| Docker Pulls | Docker Stars | Size | Sponsors |
-| --- | --- | --- | --- |
-| [![Docker pulls](https://img.shields.io/docker/pulls/elswork/samba.svg)](https://hub.docker.com/r/elswork/samba "samba on Docker Hub") | [![Docker stars](https://img.shields.io/docker/stars/elswork/samba.svg)](https://hub.docker.com/r/elswork/samba "samba on Docker Hub") | [![Docker Image size](https://img.shields.io/docker/image-size/elswork/samba)](https://hub.docker.com/r/elswork/samba "samba on Docker Hub") | [![GitHub Sponsors](https://img.shields.io/github/sponsors/elswork)](https://github.com/sponsors/elswork "Sponsor me!") |
 
 ## Compatible Architectures
 
@@ -57,9 +50,9 @@ Start a samba fileshare.
 ``` sh
 docker run -d -p 139:139 -p 445:445 \
   -- hostname any-host-name \ # Optional
-  -e TZ=Europe/Madrid \ # Optional
+  -e TZ=Europe/Helsinki \ # Optional
   -v /any/path:/share/data \ # Replace /any/path with some path in your system owned by a real user from your host filesystem
-  elswork/samba \
+  devosku/samba \
   -u "1000:1000:alice:alice:put-any-password-here" \ # At least the first user must match (password can be different) with a real user from your host filesystem
   -u "1001:1001:bob:bob:secret" \
   -u "1002:1002:guest:guest:guest" \
@@ -72,8 +65,8 @@ docker run -d -p 139:139 -p 445:445 \
 This is my real usage command:
 
 ``` sh
-docker run -d -p 139:139 -p 445:445 -e TZ=Europe/Madrid \
-    -v /home/pirate/docker/makefile:/share/folder elswork/samba \
+docker run -d -p 139:139 -p 445:445 -e TZ=Europe/Helsinki \
+    -v /home/pirate/docker/makefile:/share/folder devosku/samba \
     -u "1000:1000:pirate:pirate:put-any-password-here" \
     -s "SmbShare:/share/folder:rw:pirate"
 ```
@@ -81,17 +74,10 @@ docker run -d -p 139:139 -p 445:445 -e TZ=Europe/Madrid \
 or this if the user that owns the path to be shared match with the user that raise up the container:
 
 ``` sh
-docker run -d -p 139:139 -p 445:445 --hostname $HOSTNAME -e TZ=Europe/Madrid \
-    -v /home/pirate/docker/makefile:/share/folder elswork/samba \
+docker run -d -p 139:139 -p 445:445 --hostname $HOSTNAME -e TZ=Europe/Helsinki \
+    -v /home/pirate/docker/makefile:/share/folder devosku/samba \
     -u "$(id -u):$(id -g):$(id -un):$(id -gn):put-any-password-here" \
     -s "SmbShare:/share/folder:rw:$(id -un)"
 ```
 
 On Windows point your filebrowser to `\\host-ip\` to preview site.
-
----
-**[Sponsor me!](https://github.com/sponsors/elswork) Together we will be unstoppable.**
-
-Other ways to fund me:
-
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/elswork)](https://github.com/sponsors/elswork) [![Donate PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?business=LFKA5YRJAFYR6&no_recurring=0&item_name=Open+Source+Donation&currency_code=EUR) [![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/18yfsHW2ma4SiY685wh4h7a1aTCqkq2AEc)](https://en.cryptobadges.io/donate/18yfsHW2ma4SiY685wh4h7a1aTCqkq2AEc) [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0x186b91982CbB6450Af5Ab6F32edf074dFCE8771c)](https://en.cryptobadges.io/donate/0x186b91982CbB6450Af5Ab6F32edf074dFCE8771c)
